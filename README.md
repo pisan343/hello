@@ -7,6 +7,23 @@ A simple CLion project to make sure that we get
 - compiler warnings
 - cppcheck warning for memory leaks
 - cpplint warnings for lines longer than 80 characters
+- can create and work with GitHub
+
+## Setting up CLion
+
+1. Enable CLion plugins: cppcheck, cpplint, GitHub and Git Integration
+
+2. Install the underlying programs (cppcheck, cpplint, git).
+  * For Windows, this is best done using https://www.msys2.org/
+  * For Mac, this is best done using https://brew.sh/
+
+3. Create  GitHub account.
+
+4. Configure CLion via Settings > Version Control
+
+5. Copy the contents of main.cpp from this project to your own CLion project.
+You should see cppcheck and cpplint warnings on the right gutter for main.cpp
+If you do not see the warnings, check your configuration
 
 ## Starting a new GitHub project
 
@@ -20,6 +37,7 @@ A simple CLion project to make sure that we get
 2. Your newly created repository should have a URL like https://github.com/pisan343/helloworld
 
 3. Clone the project to your computer using GitHub Desktop
+  * (I put all my GitHub code under a github directory to make it easier to find)
   * Your project should now be in C:\Users\pisan\github\helloworld (for Windows)
   * Your project should now be in /Users/pisan/github/helloworld (for Mac)
 
