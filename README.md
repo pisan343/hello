@@ -19,11 +19,15 @@ A simple CLion project to make sure that we get
 
 3. Create  GitHub account.
 
-4. Configure CLion via Settings > Version Control
+4. Configure CLion git account information via Settings > Version Control
 
 5. Copy the contents of main.cpp from this project to your own CLion project.
 You should see cppcheck and cpplint warnings on the right gutter for main.cpp
 If you do not see the warnings, check your configuration
+
+6. CPPLINT.cfg file is a configuration file for cpplint.
+You can either provide all the flags via command line (or though CLion configuration)
+or you can have a CPPLINT.cfg in the directory cpplint is being run
 
 ## Starting a new GitHub project
 
