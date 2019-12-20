@@ -15,7 +15,7 @@ echo "*** Compiling"
 clang++ -std=c++14 -Wall -Wextra -Wno-sign-compare *.cpp -g -o myprogram.exe
 
 echo "*** checking style based on LLVM"
-clang-tidy *.cpp -- --format-style=llvm -std=c++14
+clang-tidy --format-style=llvm *.cpp -- -std=c++14
 
 echo "*** running"
 ./myprogram.exe
