@@ -14,8 +14,21 @@ date
 echo "*** Compiling"
 clang++ -std=c++14 -Wall -Wextra -Wno-sign-compare *.cpp -g -o myprogram.exe
 
-echo "*** checking style based on LLVM"
-clang-tidy --format-style=llvm *.cpp -- -std=c++14
+echo "*** checking C++ style"
+clang-tidy *.cpp -- -std=c++14
+
+echo "*** checking formatting based on LLVM"
+clang-format -style=llvm -dump-config > .clang-format
+# for all cpp files, create a file-formatted.txt version,
+# use diff on the new file and then delete the formatted version
+for F in *.cpp; \
+  do clang-format "$F" > "$F"-formatted.txt; \
+  echo "$F";
+  diff  "$F" "$F"-formatted.txt; \
+  rm "$F"-formatted.txt; \
+done
+
+
 
 echo "*** running"
 ./myprogram.exe
