@@ -12,13 +12,10 @@
 date
 
 echo "*** Compiling"
-g++ -std=c++14 -Wall -Wextra -Wno-sign-compare *.cpp -g -o myprogram.exe
+clang++ -std=c++14 -Wall -Wextra -Wno-sign-compare *.cpp -g -o myprogram.exe
 
-echo "*** cpplint"
-cpplint *.cpp *.h
-
-echo "*** cppcheck"
-cppcheck --enable=all --inconclusive --language=c++ --std=posix --suppress=missingIncludeSystem *.cpp *.h
+echo "*** checking style based on LLVM"
+clang-tidy *.cpp -- --format-style=llvm -std=c++14
 
 echo "*** running"
 ./myprogram.exe

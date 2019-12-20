@@ -1,4 +1,4 @@
-/**
+/*
  * Hello World
  *
  * @author Yusuf Pisan
@@ -16,11 +16,11 @@ int main() {
   // set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -Wno-sign-compare")
   int i;
 
-  // memory leak warning from cppcheck
+  // memory leak
   int *leak = new int[10];
 
-  // long line warning from cpplint
-  cout << "Long lines are bad, limit it to 80 characters, use CLion > Settings > Editor > Code Style > Visual Guides" << endl;
+  // long line
+  cout << "Use short lines, max 80 characters. Long lines are bad. When you have long lines, the reader has to scroll left-and-right when reading your code" << endl;
 
   cout << "Hello, World!" << endl;
 
