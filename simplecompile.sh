@@ -34,7 +34,7 @@ echo "*** running"
 ./myprogram.exe
 
 echo "*** running with valgrind"
-valgrind ./myprogram.exe
+valgrind ./myprogram.exe 2>&1 | grep "in use at exit:"
 
 echo "*** cleaning up"
 rm myprogram.exe
