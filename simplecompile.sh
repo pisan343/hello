@@ -137,6 +137,7 @@ rm myprogram 2>/dev/null
 rm -rf myprogram.dSYM 2>/dev/null
 rm core 2>/dev/null
 rm myprogram-valgrind-output.txt 2>/dev/null
+rm .clang-format 2>/dev/null
 
 echo "==================================================================="
 date

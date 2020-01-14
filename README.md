@@ -53,15 +53,62 @@ the necessary project files which tells the IDE how to compile things
         - The project should compile and run without modifications
         - Click on "Version Control" on the left side of browser
         - Click on "Commit & Push" to push your changes to GitHub
+        - If you have made changes on repl.it but want to revert to the version
+        that is on GitHub use:
+            ```
+            git rebase --autostash master
+            git reset --hard master
+            ```
     - For Visual Studio
         - Not sure, email me instructions
 
 
-5. In CLion, use VCS > Commit and make sure main.cpp and CMakeLists.txt have check boxes next to them
-  * If you do not have a VCS menu in CLion, install CLion plugins GitHub and Git Integration
-  * Add a meaningful commit log comment such as "starting my first project"
+
+5. Confirm that your modified files are on GitHub by
+visiting the GitHub web page
+
+## Files included in this project
+
+`README.md` - This file, explanation of the project
+
+`main.cpp` - C++ program to be compiled
+
+`CMakeLists.txt` - cmake file that CLion uses to figure out what command line
+options are used when compiling the program
+
+`simplecompile.sh` - a shell program to compile and run the project
+to make it easier to use from command line. Outputs date, machine name,
+user name, chooses between clang++ and g++ as compiler, runs clang-tidy
+to check for programming warnings, runs clang-format to make suggestions for
+indentation, runs valgrind to test for memory leaks, runs the program with
+`ASAN_OPTIONS=detect_leaks=1` to check for memory leaks. 
+
+Generates lots of output, so best used as
+```shell script
+$ ./simplecompile.sh > output.txt 2>&1
+```
+
+`output.txt` - output created from `simplecompile.sh`
+
+`.travis.yml` - If TravisCI is configured, this file will be used to
+run the project automatically every time it is pushed to GitHub. Results will
+be at https://travis-ci.com/
+
+`.github/workflows/githubsimplecompile.yml` - This file will be used to
+run the project automatically every time it is pushed to GitHub. Results will
+be on GitHub under "Actions"
+
+`.gitignore` - Files that should never be pushed to GitHub, such as core dumps,
+executables, cached project files, etc
+
+`.clang-tidy` - Specify the checks for `clang-tidy` program. Full list of
+checks is at https://clang.llvm.org/extra/clang-tidy/checks/list.html
+Also specifies `readability-identifier-naming` options based on 
+LLVM style in https://llvm.org/docs/CodingStandards.html#the-low-level-issues
+Modify it to choose a different style.
+
+`.git` - Directory storing the database of project history including all
+commits,comments, etc.
 
 
-6. Use VCS > Git > Push to upload your project to GitHub.
 
-7. Confirm that your modified files are on the web repository
