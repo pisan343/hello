@@ -131,13 +131,24 @@ else
   echo "*** ERROR could not find myprogram"
 fi
 
+# only clang++ has --analyze
+if hash clang++ 2>/dev/null; then
+  echo "==================================================================="
+  echo "*** using --analyze option for clang++ to detect issues"
+  clang++ --analyze -std=c++14 ./*.cpp > myprogram-clangstatic-output.txt 2>&1
+  cat myprogram-clangstatic-output.txt
+  grep --quiet "warning" myprogram-clangstatic-output.txt
+  # exit status of grep is 0 is no match found, 1 if match found
+  LAST_COMMAND_RESULT=$?
+  if [ $LAST_COMMAND_RESULT -eq 0 ]; then
+    echo "---> grep found a warning message, setting exitcode to 1"
+    EXIT_VALUE=1
+  fi
+fi
+
 echo "==================================================================="
 echo "*** cleaning up, deleting myprogram"
-rm myprogram 2>/dev/null
-rm -rf myprogram.dSYM 2>/dev/null
-rm core 2>/dev/null
-rm myprogram-valgrind-output.txt 2>/dev/null
-rm .clang-format 2>/dev/null
+rm -rf myprogram myprogram.dSYM core myprogram-valgrind-output.txt myprogram-clangstatic-output.txt .clang-format 2>/dev/null
 
 echo "==================================================================="
 date
