@@ -9,15 +9,11 @@ language: cpp
 
 dist: xenial
 
-# Removed to simplecompile script
-#   - clang++ --version
-#   - clang-tidy --version
 before_install:
   - uname -a
   - sudo apt-get install valgrind
 
-# Calling ./simplecompile.sh
 script:
     - echo "Start TravisCI"
-    - ./simplecompile.sh
-    - echo "End TravisCI"
+    - chmod 755 simplecompile.sh; ./simplecompile.sh
+
