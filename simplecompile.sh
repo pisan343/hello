@@ -2,7 +2,7 @@
 
 # The master version lives at https://github.com/pisanorg/w/wiki/simple-compile
 # Submit suggestions and modification on the wiki
-# Last Modified: 1 Jan 2020 - Yusuf Pisan
+# Last Modified: 14 Jan 2020 - Yusuf Pisan
 
 
 # Easily compile and run this program under Linux, using
