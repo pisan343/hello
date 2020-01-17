@@ -2,7 +2,7 @@
 
 Hello World
 
-[![Run on Repl.it](https://repl.it/badge/github/pisan343/hello)](https://repl.it/github/pisan343/hello)
+[Run on Repl.it](https://repl.it/github/pisan343/hello)
 
 A "simple" project to setup the development pipeline check to make sure we get
 
