@@ -1,0 +1,121 @@
+===================================================================
+Recommended Usage: ./simplecompile.sh > output.txt 2>&1
+===================================================================
+Wed Dec 25 11:05:01 PST 2019
+Linux csslab1.uwb.edu 3.10.0-1062.1.1.el7.x86_64 #1 SMP Fri Sep 13 22:55:44 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+uid=870540(pisan) gid=2120870540(pisan) groups=2120870540(pisan),579804(faculty)
+===================================================================
+*** compiling with clang++ to create an executable called myprogram
+===================================================================
+clang version 7.0.1 (tags/RELEASE_701/final)
+Target: x86_64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /opt/rh/llvm-toolset-7.0/root/usr/bin
+main.cpp:17:7: warning: unused variable 'i' [-Wunused-variable]
+  int i;
+      ^
+main.cpp:20:8: warning: unused variable 'leak' [-Wunused-variable]
+  int *leak = new int[10];
+       ^
+2 warnings generated.
+===================================================================
+*** running myprogram
+Use short lines, max 80 characters. Long lines are bad. When you have long lines, the reader has to scroll left-and-right when reading your code
+Hello, World!
+===================================================================
+*** running clang-tidy using options from .clang-tidy
+LLVM (http://llvm.org/):
+  LLVM version 7.0.1
+  Optimized build.
+  Default target: x86_64-unknown-linux-gnu
+  Host CPU: broadwell
+7491 warnings generated.
+/home/NETID/pisan/tmp/hello/main.cpp:10:1: warning: do not use namespace using-directives; use using-declarations instead [google-build-using-namespace]
+using namespace std;
+^
+/home/NETID/pisan/tmp/hello/main.cpp:20:3: warning: initializing non-owner 'int *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+  int *leak = new int[10];
+  ^
+/home/NETID/pisan/tmp/hello/main.cpp:20:8: warning: Value stored to 'leak' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
+  int *leak = new int[10];
+       ^
+/home/NETID/pisan/tmp/hello/main.cpp:20:8: note: Value stored to 'leak' during its initialization is never read
+/home/NETID/pisan/tmp/hello/main.cpp:23:3: warning: Potential leak of memory pointed to by 'leak' [clang-analyzer-cplusplus.NewDeleteLeaks]
+  cout << "Use short lines, max 80 characters. Long lines are bad. When you have long lines, the reader has to scroll left-and-right when reading your code" << endl;
+  ^
+/home/NETID/pisan/tmp/hello/main.cpp:20:15: note: Memory is allocated
+  int *leak = new int[10];
+              ^
+/home/NETID/pisan/tmp/hello/main.cpp:23:3: note: Potential leak of memory pointed to by 'leak'
+  cout << "Use short lines, max 80 characters. Long lines are bad. When you have long lines, the reader has to scroll left-and-right when reading your code" << endl;
+  ^
+Suppressed 7487 warnings (7487 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+===================================================================
+*** running clang-format format formatting suggestions
+*** using existing .clang-format
+*** formatting suggestions for main.cpp
+16c16,17
+<   // set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -Wno-sign-compare")
+---
+>   // set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra
+>   // -Wno-sign-compare")
+23c24,27
+<   cout << "Use short lines, max 80 characters. Long lines are bad. When you have long lines, the reader has to scroll left-and-right when reading your code" << endl;
+---
+>   cout << "Use short lines, max 80 characters. Long lines are bad. When you "
+>           "have long lines, the reader has to scroll left-and-right when "
+>           "reading your code"
+>        << endl;
+===================================================================
+*** running valgrind to detect memory leaks
+*** Examine "definitely lost" 
+==23506== Memcheck, a memory error detector
+==23506== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==23506== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
+==23506== Command: ./myprogram
+==23506== 
+Use short lines, max 80 characters. Long lines are bad. When you have long lines, the reader has to scroll left-and-right when reading your code
+Hello, World!
+==23506== 
+==23506== HEAP SUMMARY:
+==23506==     in use at exit: 40 bytes in 1 blocks
+==23506==   total heap usage: 1 allocs, 0 frees, 40 bytes allocated
+==23506== 
+==23506== 40 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==23506==    at 0x4C2AB68: operator new[](unsigned long) (vg_replace_malloc.c:433)
+==23506==    by 0x40088A: main (main.cpp:20)
+==23506== 
+==23506== LEAK SUMMARY:
+==23506==    definitely lost: 40 bytes in 1 blocks
+==23506==    indirectly lost: 0 bytes in 0 blocks
+==23506==      possibly lost: 0 bytes in 0 blocks
+==23506==    still reachable: 0 bytes in 0 blocks
+==23506==         suppressed: 0 bytes in 0 blocks
+==23506== 
+==23506== For counts of detected and suppressed errors, rerun with: -v
+==23506== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+---> Last command executed failed with exitcode code: 111
+===================================================================
+*** compiling with clang++ to checking for memory leaks
+===================================================================
+*** running myprogram with memory checking
+Use short lines, max 80 characters. Long lines are bad. When you have long lines, the reader has to scroll left-and-right when reading your code
+Hello, World!
+
+=================================================================
+==23510==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x53f128 in operator new[](unsigned long) (/home/NETID/pisan/tmp/hello/myprogram+0x53f128)
+    #1 0x54361a in main /home/NETID/pisan/tmp/hello/main.cpp:20:15
+    #2 0x7fa8e1723504 in __libc_start_main (/lib64/libc.so.6+0x22504)
+
+SUMMARY: AddressSanitizer: 40 byte(s) leaked in 1 allocation(s).
+---> Last command executed failed with exitcode code: 1
+===================================================================
+*** cleaning up, deleting myprogram
+===================================================================
+Wed Dec 25 11:05:06 PST 2019
+===================================================================
+Exiting with 1
