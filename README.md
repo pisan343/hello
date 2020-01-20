@@ -2,7 +2,15 @@
 
 Hello World
 
-[Run on Repl.it](https://repl.it/github/pisan343/hello)
+Import this repository and run on repl.It using
+[https://repl.it/github/pisan343/hello](https://repl.it/github/pisan343/hello)
+
+The output from TravisCI from compiling and testing this project is at
+[https://travis-ci.com/pisan343/hello](https://travis-ci.com/pisan343/hello)
+
+The output from GitHub Actions is only visible to contributors,
+it is at
+[https://github.com/pisan343/hello/actions](https://github.com/pisan343/hello/actions)
 
 A "simple" project to setup the development pipeline check to make sure we get
 
