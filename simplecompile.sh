@@ -3,7 +3,7 @@
 # The master version lives at https://github.com/pisanorg/w/wiki/simple-compile
 # and at https://github.com/pisan343/hello
 # Submit suggestions and modification on the wiki
-# Last Modified: 20 Jan 2020 - Yusuf Pisan
+# Last Modified: 24 Jan 2020 - Yusuf Pisan
 
 # Easily compile and run this program under Linux, using
 #   Compiler: clang++ or g++
@@ -115,7 +115,7 @@ if hash clang-format 2>/dev/null; then
   clang-format -style=llvm -dump-config >> .clang-format
   for i in ./*.cpp; do
     echo "*** formatting suggestions for $i"
-    clang-format "$i" | diff "$i" -
+    clang-format "$i" | diff --unchanged-line-format="" --old-line-format=":%.3dn OLD: %L" --new-line-format=":    NEW: %L" "$i" -
   done
   rm -f .clang-format 2> /dev/null
 else
