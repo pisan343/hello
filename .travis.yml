@@ -5,6 +5,8 @@
 # Add this repository to travis
 # Every time there is a commit, this script will be run and result emailed
 
+# Code coverage added based on https://github.com/codecov/example-cpp11-cmake
+
 language: cpp
 
 dist: xenial
@@ -13,7 +15,18 @@ before_install:
   - uname -a
   - sudo apt-get install valgrind
 
+addons:
+  apt:
+    packages: lcov
+
 script:
     - echo "Start TravisCI"
     - chmod 755 simplecompile.sh; ./simplecompile.sh
 
+after_success:
+    # Create lcov report
+    - lcov --capture --directory . --output-file coverage.info
+    - lcov --remove coverage.info '/usr/*' --output-file coverage.info # filter system-files
+    - lcov --list coverage.info # debug info
+    # Uploading report to CodeCov
+    - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
