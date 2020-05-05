@@ -69,6 +69,8 @@ the necessary project files which tells the IDE how to compile things
             git rebase --autostash master
             git reset --hard master
             ```
+    - For Visual Studio Code
+        - See .vscode directory
     - For Visual Studio
         - Not sure, email me instructions
 
