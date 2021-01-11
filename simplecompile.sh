@@ -77,6 +77,7 @@ echo "*** compiling with $CC to create an executable called myprogram"
 echo "==================================================================="
 
 $CC --version
+which $CC
 $CC -std=c++14 -Wall -Wextra -Wno-sign-compare ./*.cpp -g -o myprogram
 
 echo "==================================================================="
@@ -101,6 +102,10 @@ if hash clang-tidy 2>/dev/null; then
   check_last_command
 else
   echo "*** ERROR clang-tidy is not available on this system "
+  echo "*** If you are using CSS Linux Lab,"
+  echo "*** Put the following line at the end of your ~/.bashrc file."
+  echo "*** source scl_source enable llvm-toolset-7"
+  echo "*** Log out and log back in to take effect"
 fi
 
 echo "==================================================================="
