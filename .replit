@@ -1,2 +1,0 @@
-language = "cpp"
-run = "chmod 755 simplecompile.sh; ./simplecompile.sh"
